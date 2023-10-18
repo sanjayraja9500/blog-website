@@ -10,7 +10,7 @@ const BlogSection = ({ blogs, user, handleDelete }) => {
   return (
     <div>
       <div className='text-4xl font-extrabold text-orange-700  border-y-4 border-orange-700 text-start py-2 mb-4'>
-        Online Journal...
+        Online Journals!...
       </div>
       {blogs?.map((item) => (
         <div className='row pb-4' key={item.id}>
