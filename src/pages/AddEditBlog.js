@@ -174,7 +174,7 @@ const AddEditBlog = ({ user, setActive }) => {
               </div>
               <div className='col-12 py-3'>
                 <textarea
-                  className='form-control description-box'
+                  className='form-control h-[150px] resize-none '
                   placeholder='Description'
                   value={description}
                   name='description'
@@ -188,9 +188,9 @@ const AddEditBlog = ({ user, setActive }) => {
                   onChange={(e) => setFile(e.target.files[0])}
                 />
               </div>
-              <div className='col-12 py-3 text-center'>
+              <div className='col-12 py-3 text-center  '>
                 <button
-                  className='btn btn-add bg-gray-500 '
+                  className='btn  bg-black shadow-lg shadow-gray-500/50 hover:bg-gray-700 duration-300 px-2.5 py-10 text-white'
                   type='submit'
                   disabled={progress !== null && progress < 100}
                 >
