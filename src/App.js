@@ -7,7 +7,7 @@ import About from './pages/About';
 
 import Auth from './pages/Auth';
 import Detail from './pages/Detail';
-import { ToastContainer } from 'react-toastify';
+
 import 'react-toastify/dist/ReactToastify.css';
 import Header from './components/Header';
 import { auth } from './firebase';

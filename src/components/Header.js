@@ -100,7 +100,7 @@ const Header = ({ active, setActive, user, handleLogout }) => {
             ) : (
               <MDBNavbarLink
                 onClick={() => setActive('login')}
-                href='/auth'
+                href='./auth'
                 style={{
                   color: '#fff',
                   display: 'flex',
