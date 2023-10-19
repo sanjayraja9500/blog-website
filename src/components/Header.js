@@ -3,9 +3,7 @@ import {
   MDBNavbar,
   MDBContainer,
   MDBIcon,
-  MDBNavbarNav,
   MDBNavbarItem,
-  MDBNavbarLink,
   MDBNavbarToggler,
   MDBNavbarBrand,
   MDBCollapse,
@@ -48,32 +46,23 @@ const Header = ({ active, setActive, user, handleLogout }) => {
             <MDBIcon icon='bars' fas />
           </MDBNavbarToggler>
           <MDBCollapse active={active} navbar>
-            <MDBNavbarNav className='me-auto mb-2 mb-lg-0 g-8'>
-              <MDBNavbarItem className='' onClick={() => setActive('home')}>
-                <MDBNavbarLink
-                  aria-current='page'
-                  href='/'
-                  style={{ color: '#fff' }}
-                >
+            <div className='  ml-96 text-center mb-2  gap-16  flex justify-center items-center'>
+              <div className='' onClick={() => setActive('home')}>
+                <Link to='/' className='text-white '>
                   Home
-                </MDBNavbarLink>
-              </MDBNavbarItem>
-              <MDBNavbarItem className='' onClick={() => setActive('addBlog')}>
-                <MDBNavbarLink
-                  href='/addBlog'
-                  style={{
-                    color: '#fff',
-                  }}
-                >
+                </Link>
+              </div>
+              <div onClick={() => setActive('addBlog')}>
+                <Link className='text-white' to='/addBlog'>
                   Add Blog
-                </MDBNavbarLink>
-              </MDBNavbarItem>
-              <MDBNavbarItem className='' onClick={() => setActive('about')}>
-                <MDBNavbarLink href='/about' style={{ color: '#fff' }}>
+                </Link>
+              </div>
+              <div className='' onClick={() => setActive('about')}>
+                <Link to='/about' className='text-white'>
                   About
-                </MDBNavbarLink>
-              </MDBNavbarItem>
-            </MDBNavbarNav>
+                </Link>
+              </div>
+            </div>
           </MDBCollapse>
           <MDBNavbarItem className='flex flex-row justify-center items-center gap-4'>
             {userId ? (
@@ -98,9 +87,9 @@ const Header = ({ active, setActive, user, handleLogout }) => {
                 </Link>
               </>
             ) : (
-              <MDBNavbarLink
+              <Link
                 onClick={() => setActive('login')}
-                href='./auth'
+                to='./auth'
                 style={{
                   color: '#fff',
                   display: 'flex',
@@ -108,7 +97,7 @@ const Header = ({ active, setActive, user, handleLogout }) => {
                 }}
               >
                 Login
-              </MDBNavbarLink>
+              </Link>
             )}
           </MDBNavbarItem>
         </MDBContainer>
