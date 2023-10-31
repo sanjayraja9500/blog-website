@@ -3,15 +3,35 @@ import { collection, onSnapshot } from 'firebase/firestore';
 import { db } from '../firebase';
 import BlogSection from '../components/BlogSection';
 import Spinner from '../components/Spinner';
-import { deleteDoc, doc } from 'firebase/firestore';
+import {
+  deleteDoc,
+  doc,
+  orderBy,
+  getDocs,
+  query,
+  where,
+} from 'firebase/firestore';
 import { toast, ToastContainer } from 'react-toastify';
 import MostPopular from '../components/MostPopular';
+import Search from '../components/Search';
+import { useLocation } from 'react-router-dom';
+import { isNull, isEmpty } from 'lodash';
 
-const Home = ({ setActive, user }) => {
+function useQuery() {
+  return new URLSearchParams(useLocation().search);
+}
+
+const Home = ({ setActive, user, active }) => {
   const [loading, setLoading] = useState(true);
   const [blogs, setBlogs] = useState([]);
+  const [search, setSearch] = useState('');
+  const [hide, setHide] = useState(false);
+  const queryString = useQuery();
+  const searchQuery = queryString.get('searchQuery');
+  const location = useLocation();
 
   useEffect(() => {
+    setSearch('');
     const unsub = onSnapshot(
       collection(db, 'blogs'),
       (snapshot) => {
@@ -31,7 +51,26 @@ const Home = ({ setActive, user }) => {
     return () => {
       unsub();
     };
-  }, []);
+  }, [setActive, active]);
+
+  const searchBlogs = async () => {
+    const blogRef = collection(db, 'blogs');
+    const searchTitleQuery = query(blogRef, where('title', '==', searchQuery));
+    const titleSnapshot = await getDocs(searchTitleQuery);
+    let searchTitleBlogs = [];
+    titleSnapshot.forEach((doc) => {
+      searchTitleBlogs.push({ id: doc.id, ...doc.data() });
+      setBlogs(searchTitleBlogs);
+      setActive('');
+      setHide(true);
+    });
+  };
+
+  useEffect(() => {
+    if (!isNull(searchQuery)) {
+      searchBlogs();
+    }
+  }, [searchQuery]);
 
   if (loading) {
     return <Spinner />;
@@ -50,6 +89,21 @@ const Home = ({ setActive, user }) => {
     }
   };
 
+  const getBlogs = async () => {
+    const blogRef = collection(db, 'blogs');
+
+    const docSnapshot = await getDocs(blogRef);
+    setBlogs(docSnapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() })));
+  };
+
+  const handleChange = (e) => {
+    const { value } = e.target;
+    if (isEmpty(value)) {
+      getBlogs();
+    }
+    setSearch(value);
+  };
+
   return (
     <div className='container-fluid pb-4 pt-4 padding'>
       <div className='container padding'>
@@ -62,14 +116,15 @@ const Home = ({ setActive, user }) => {
             />
           </div>
 
-          <form>
-            <input
-              type='text'
-              className='w-2/5 h-10 p-px mt-1.5 mr-1.5 mb-1.5 ml-80 border-solid border-2 border-gray-600 rounded text-base font-semibold'
-              placeholder='Search Blogs...!'
-            />
-          </form>
+          <Search search={search} handleChange={handleChange} />
+
           <div className='col-md-8'>
+            {blogs.length === 0 && location.pathname !== '/' && (
+              <>
+                <h4>No Blog found with search keyword</h4>
+                <strong>{searchQuery}</strong>
+              </>
+            )}
             <h2 className='text-2xl text-black border-b-2 border-indigo-500'>
               <BlogSection
                 blogs={blogs}

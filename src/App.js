@@ -48,22 +48,27 @@ const App = () => {
       />
 
       <Routes>
-        <Route path='/' element={<Home setActive={setActive} user={user} />} />
+        <Route
+          path='/'
+          element={<Home setActive={setActive} active={active} user={user} />}
+        />
+        <Route
+          path='/search'
+          element={<Home setActive={setActive} user={user} />}
+        />
+
         <Route
           path='/addBlog'
           element={<AddEditBlog user={user} setActive={setActive} />}
         />
-
         <Route
           path='/editBlog/:id'
           element={<AddEditBlog user={user} setActive={setActive} />}
         />
-
         <Route
           path='/detail/:id'
           element={<Detail setActive={setActive} user={user} />}
         />
-
         <Route path='/about' element={<About />} />
         <Route path='/auth' element={<Auth setActive={setActive} />} />
         <Route path='*' element={<NotFound />} />
