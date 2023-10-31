@@ -61,6 +61,14 @@ const Home = ({ setActive, user }) => {
               alt=''
             />
           </div>
+
+          <form>
+            <input
+              type='text'
+              className='w-2/5 h-10 p-px mt-1.5 mr-1.5 mb-1.5 ml-80 border-solid border-2 border-gray-600 rounded text-base font-semibold'
+              placeholder='Search Blogs...!'
+            />
+          </form>
           <div className='col-md-8'>
             <h2 className='text-2xl text-black border-b-2 border-indigo-500'>
               <BlogSection
