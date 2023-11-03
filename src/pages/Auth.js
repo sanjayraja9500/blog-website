@@ -8,6 +8,7 @@ import {
 } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
 import { signInWithPopup } from 'firebase/auth';
+import { FcGoogle } from 'react-icons/fc';
 
 const initialState = {
   firstName: '',
@@ -76,12 +77,13 @@ const Auth = ({ setActive }) => {
       }
     }
     navigate('/home');
+    toast.success('Login Successfully');
   };
   return (
     <div className='container-fluid mb-4 mt-24 '>
       <div className='container bg-gradient-to-r from-blue-500 to-transparent '>
         <div className='col-12 text-center'>
-          <div className='text-center  text-orange-500 heading py-2 text-3xl font-bold'>
+          <div className='text-center  text-orange-500 py-2 heading  text-3xl font-bold'>
             {!signUp ? 'Sign-In' : 'Sign-Up'}
           </div>
         </div>
@@ -162,11 +164,12 @@ const Auth = ({ setActive }) => {
                 </button>
               </div>
 
-              <div className=' flex justify-center items-center rounded'>
+              <div className=' flex  flex-col justify-center items-center rounded'>
                 <button
                   onClick={handleLogin}
-                  className='bg-gradient-to-r from-orange-500 to-transparent text-white py-2.5 px-12'
+                  className='bg-gradient-to-r from-green-300 to-blue-400 hover:from-pink-300 hover:to-yellow-200  text-black py-2.5 px-12 font-bold  '
                 >
+                  <FcGoogle className='ml-16 text-2xl' />
                   Sign-In with Google
                 </button>
               </div>
@@ -230,17 +233,6 @@ const Auth = ({ setActive }) => {
           </div>
         ) : null}
       </div>
-      <ToastContainer
-        position='top-left'
-        autoClose={2000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        Draggable
-        pauseOnHovertheme='dark'
-      />
     </div>
   );
 };

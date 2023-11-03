@@ -27,13 +27,13 @@ const Header = ({ active, setActive, user, handleLogout }) => {
         }}
       >
         <MDBContainer fluid>
-          <MDBNavbarBrand href='/home'>
+          <Link to='/home'>
             <img
               className='h-10 w-10 bg-transparent'
               src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSDudJst-bD3ls6arZ7My5RUsScphJQXsqlwB3Dl3N6G9SJz8gaHfOL8fuVCqjPQlJMU3c&usqp=CAU'
               alt='logo'
             />
-          </MDBNavbarBrand>
+          </Link>
           <MDBNavbarToggler
             type='button'
             data-target='#navbarColor02'

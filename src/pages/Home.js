@@ -151,17 +151,6 @@ const Home = ({ setActive, user, active }) => {
           </div>
         </div>
       </div>
-      <ToastContainer
-        position='top-left'
-        autoClose={2000}
-        hideProgressBar={false}
-        newestOnTop={false}
-        closeOnClick
-        rtl={false}
-        pauseOnFocusLoss
-        Draggable
-        pauseOnHovertheme='dark'
-      />
     </div>
   );
 };

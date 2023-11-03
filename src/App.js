@@ -4,7 +4,7 @@ import Home from './pages/Home';
 import AddEditBlog from './pages/AddEditBlog';
 import NotFound from './pages/NotFound';
 import About from './pages/About';
-
+import { ToastContainer, toast } from 'react-toastify';
 import Auth from './pages/Auth';
 import Detail from './pages/Detail';
 
@@ -35,6 +35,7 @@ const App = () => {
       setUser(null);
       setActive('login');
       navigate('/');
+      toast.success('Logout Successfully');
     });
   };
 
@@ -46,7 +47,17 @@ const App = () => {
         user={user}
         handleLogout={handleLogout}
       />
-
+      <ToastContainer
+        position='top-left'
+        autoClose={2000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        Draggable
+        pauseOnHovertheme='dark'
+      />
       <Routes>
         <Route path='/' element={<Auth setActive={setActive} />} />
         <Route
