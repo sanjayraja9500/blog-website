@@ -4,7 +4,6 @@ import { db } from '../firebase';
 import { doc, getDoc } from 'firebase/firestore';
 import { BsFillArrowLeftSquareFill } from 'react-icons/bs';
 import { Link } from 'react-router-dom';
-import MostPopular from '../components/MostPopular';
 
 const Detail = ({ setActive }) => {
   const { id } = useParams();
@@ -60,7 +59,7 @@ const Detail = ({ setActive }) => {
               </p>
             </div>
             <Link
-              to='/'
+              to='/home'
               className=' flex items-center justify-center  mt-3
             '
             >

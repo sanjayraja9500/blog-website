@@ -27,7 +27,7 @@ const Header = ({ active, setActive, user, handleLogout }) => {
         }}
       >
         <MDBContainer fluid>
-          <MDBNavbarBrand href='/'>
+          <MDBNavbarBrand href='/home'>
             <img
               className='h-10 w-10 bg-transparent'
               src='https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSDudJst-bD3ls6arZ7My5RUsScphJQXsqlwB3Dl3N6G9SJz8gaHfOL8fuVCqjPQlJMU3c&usqp=CAU'
@@ -48,7 +48,7 @@ const Header = ({ active, setActive, user, handleLogout }) => {
           <MDBCollapse active={active} navbar>
             <div className='  ml-96 text-center mb-2  gap-16  flex justify-center items-center'>
               <div className='' onClick={() => setActive('home')}>
-                <Link to='/' className='text-white '>
+                <Link to='/home' className='text-white '>
                   Home
                 </Link>
               </div>
@@ -80,7 +80,7 @@ const Header = ({ active, setActive, user, handleLogout }) => {
                 >
                   {user?.displayName}
                 </p>
-                <Link to='./auth'>
+                <Link to='/'>
                   <p className='text-white text-xl mt-2' onClick={handleLogout}>
                     Logout
                   </p>
@@ -89,7 +89,7 @@ const Header = ({ active, setActive, user, handleLogout }) => {
             ) : (
               <Link
                 onClick={() => setActive('login')}
-                to='./auth'
+                to='/'
                 style={{
                   color: '#fff',
                   display: 'flex',

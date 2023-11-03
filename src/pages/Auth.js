@@ -1,12 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { toast, ToastContainer } from 'react-toastify';
-import { auth } from '../firebase';
+import { auth, provider } from '../firebase';
 import {
   createUserWithEmailAndPassword,
   signInWithEmailAndPassword,
   updateProfile,
 } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
+import { signInWithPopup } from 'firebase/auth';
 
 const initialState = {
   firstName: '',
@@ -19,14 +20,30 @@ const initialState = {
 const Auth = ({ setActive }) => {
   const [state, setState] = useState(initialState);
   const [signUp, setSignUp] = useState(false);
+  const [show, setShow] = useState(false);
 
   const { firstName, lastName, email, password, confirmPassword } = state;
 
   const navigate = useNavigate();
+  const [value, setValue] = useState('');
 
   const handleChange = (e) => {
     setState({ ...state, [e.target.name]: e.target.value });
   };
+
+  const handleLogin = (user) => {
+    signInWithPopup(auth, provider).then((data) => {
+      setValue(data.user.email);
+      localStorage.setItem('email', data.user.email);
+      setTimeout(() => {
+        navigate('/home');
+      }, 1500);
+      toast.success('Login Successfully');
+    });
+  };
+  useEffect(() => {
+    setValue(localStorage.getItem('email'));
+  });
 
   const handleAuth = async (e) => {
     e.preventDefault();
@@ -58,13 +75,13 @@ const Auth = ({ setActive }) => {
         return toast.error('All fields are Mandatory to fill');
       }
     }
-    navigate('/');
+    navigate('/home');
   };
   return (
     <div className='container-fluid mb-4 mt-24 '>
       <div className='container bg-gradient-to-r from-blue-500 to-transparent '>
         <div className='col-12 text-center'>
-          <div className='text-center text-orange-500 heading py-2 text-3xl text-extrabold'>
+          <div className='text-center  text-orange-500 heading py-2 text-3xl font-bold'>
             {!signUp ? 'Sign-In' : 'Sign-Up'}
           </div>
         </div>
@@ -144,6 +161,15 @@ const Auth = ({ setActive }) => {
                   {!signUp ? 'Sign-in' : 'Sign-up'}
                 </button>
               </div>
+
+              <div className=' flex justify-center items-center rounded'>
+                <button
+                  onClick={handleLogin}
+                  className='bg-gradient-to-r from-orange-500 to-transparent text-white py-2.5 px-12'
+                >
+                  Sign-In with Google
+                </button>
+              </div>
             </form>
             <div>
               {!signUp ? (
@@ -183,6 +209,26 @@ const Auth = ({ setActive }) => {
             </div>
           </div>
         </div>
+      </div>
+
+      <div className='flex justify-center items-center'>
+        <button
+          onClick={() => setShow(!show)}
+          className='bg-yellow-200 text-black text-sm p-2  mt-2 font-semibold rounded'
+        >
+          Show Crediential
+        </button>
+        {show ? (
+          <div className=' p-1 ml-4 mt-3 bg-orange-100 border b-2 rounded'>
+            <h6 className='text-center font-bold'>User Credential</h6>
+            <p>
+              <span className='font-semibold'>Email:</span> john01@gmail.com
+            </p>
+            <p className='-mt-4'>
+              <span className='font-semibold'>Password:</span>123456
+            </p>
+          </div>
+        ) : null}
       </div>
       <ToastContainer
         position='top-left'

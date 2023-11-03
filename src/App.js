@@ -34,7 +34,7 @@ const App = () => {
     signOut(auth).then(() => {
       setUser(null);
       setActive('login');
-      navigate('/auth');
+      navigate('/');
     });
   };
 
@@ -48,9 +48,16 @@ const App = () => {
       />
 
       <Routes>
+        <Route path='/' element={<Auth setActive={setActive} />} />
         <Route
-          path='/'
-          element={<Home setActive={setActive} active={active} user={user} />}
+          path='/home'
+          element={
+            user && user.uid ? (
+              <Home setActive={setActive} active={active} user={user} />
+            ) : (
+              <Navigate to='/' />
+            )
+          }
         />
         <Route
           path='/search'
@@ -59,18 +66,30 @@ const App = () => {
 
         <Route
           path='/addBlog'
-          element={<AddEditBlog user={user} setActive={setActive} />}
+          element={
+            user && user.uid ? (
+              <AddEditBlog user={user} setActive={setActive} />
+            ) : (
+              <Navigate to='/' />
+            )
+          }
         />
         <Route
           path='/editBlog/:id'
-          element={<AddEditBlog user={user} setActive={setActive} />}
+          element={
+            user && user.uid ? (
+              <AddEditBlog user={user} setActive={setActive} />
+            ) : (
+              <Navigate to='/' />
+            )
+          }
         />
         <Route
           path='/detail/:id'
           element={<Detail setActive={setActive} user={user} />}
         />
         <Route path='/about' element={<About />} />
-        <Route path='/auth' element={<Auth setActive={setActive} />} />
+
         <Route path='*' element={<NotFound />} />
       </Routes>
     </div>

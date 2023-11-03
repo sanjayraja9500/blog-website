@@ -11,7 +11,7 @@ import {
   doc,
   updateDoc,
 } from 'firebase/firestore';
-import { toast } from 'react-toastify';
+import { toast, ToastContainer } from 'react-toastify';
 
 const initialState = {
   title: '',
@@ -133,7 +133,7 @@ const AddEditBlog = ({ user, setActive }) => {
       return toast.error('All fields are mandatory to fill');
     }
 
-    navigate('/');
+    navigate('/home');
   };
 
   return (
@@ -201,6 +201,17 @@ const AddEditBlog = ({ user, setActive }) => {
           </div>
         </div>
       </div>
+      <ToastContainer
+        position='top-center'
+        autoClose={2000}
+        hideProgressBar={false}
+        newestOnTop={false}
+        closeOnClick
+        rtl={false}
+        pauseOnFocusLoss
+        Draggable
+        pauseOnHovertheme='dark'
+      />
     </div>
   );
 };

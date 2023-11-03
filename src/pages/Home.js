@@ -25,7 +25,7 @@ const Home = ({ setActive, user, active }) => {
   const [loading, setLoading] = useState(true);
   const [blogs, setBlogs] = useState([]);
   const [search, setSearch] = useState('');
-  const [hide, setHide] = useState(false);
+
   const queryString = useQuery();
   const searchQuery = queryString.get('searchQuery');
   const location = useLocation();
@@ -56,14 +56,23 @@ const Home = ({ setActive, user, active }) => {
   const searchBlogs = async () => {
     const blogRef = collection(db, 'blogs');
     const searchTitleQuery = query(blogRef, where('title', '==', searchQuery));
+    const searchCategoryQuery = query(
+      blogRef,
+      where('category', '==', searchQuery)
+    );
     const titleSnapshot = await getDocs(searchTitleQuery);
+    const categorySnapshot = await getDocs(searchCategoryQuery);
     let searchTitleBlogs = [];
+    let searchCategoryBlogs = [];
+
     titleSnapshot.forEach((doc) => {
       searchTitleBlogs.push({ id: doc.id, ...doc.data() });
-      setBlogs(searchTitleBlogs);
-      setActive('');
-      setHide(true);
     });
+    categorySnapshot.forEach((doc) => {
+      searchTitleBlogs.push({ id: doc.id, ...doc.data() });
+    });
+    const combineSearchBlogs = searchTitleBlogs.concat(searchCategoryBlogs);
+    setBlogs(combineSearchBlogs);
   };
 
   useEffect(() => {
@@ -119,12 +128,16 @@ const Home = ({ setActive, user, active }) => {
           <Search search={search} handleChange={handleChange} />
 
           <div className='col-md-8'>
-            {blogs.length === 0 && location.pathname !== '/' && (
-              <>
-                <h4>No Blog found with search keyword</h4>
-                <strong>{searchQuery}</strong>
-              </>
-            )}
+            <div className='ml-3 text-rose-500'>
+              {blogs.length === 0 && location.pathname !== '/' && (
+                <>
+                  <h4>No Blog found with search keyword</h4>
+                  <strong className='text-fuchsia-600 capitalize'>
+                    "{searchQuery}"
+                  </strong>
+                </>
+              )}
+            </div>
             <h2 className='text-2xl text-black border-b-2 border-indigo-500'>
               <BlogSection
                 blogs={blogs}
