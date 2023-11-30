@@ -132,9 +132,7 @@ const Home = ({ setActive, user, active }) => {
               {blogs.length === 0 && location.pathname !== '/' && (
                 <>
                   <h4>No Blog found with search keyword</h4>
-                  <strong className='text-fuchsia-600 capitalize'>
-                    "{searchQuery}"
-                  </strong>
+                  <strong className='text-fuchsia-600'>"{searchQuery}"</strong>
                 </>
               )}
             </div>

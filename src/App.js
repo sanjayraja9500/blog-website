@@ -99,7 +99,10 @@ const App = () => {
           path='/detail/:id'
           element={<Detail setActive={setActive} user={user} />}
         />
-        <Route path='/about' element={<About />} />
+        <Route
+          path='/about'
+          element={user && user.uid ? <About /> : <Navigate to='/' />}
+        />
 
         <Route path='*' element={<NotFound />} />
       </Routes>

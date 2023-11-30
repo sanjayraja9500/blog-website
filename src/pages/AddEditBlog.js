@@ -11,7 +11,7 @@ import {
   doc,
   updateDoc,
 } from 'firebase/firestore';
-import { toast, ToastContainer } from 'react-toastify';
+import { toast } from 'react-toastify';
 
 const initialState = {
   title: '',

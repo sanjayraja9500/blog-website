@@ -27,7 +27,7 @@ const Search = ({ search, handleChange }) => {
         </Link>
         <input
           type='text'
-          vale='search'
+          value={search}
           className='w-2/4 h-10  border-solid border-2 border-gray-600 rounded text-base font-semibold capitalize'
           placeholder='..Search Blogs..!'
           onChange={handleChange}
