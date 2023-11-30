@@ -58,6 +58,9 @@ const Auth = ({ setActive }) => {
 
         setActive('Home');
       } else {
+        setTimeout(() => {
+          navigate('/home');
+        }, 5000);
         return toast.error('All fields are Mandatory to fill');
       }
     } else {
