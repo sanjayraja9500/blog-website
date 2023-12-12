@@ -21,14 +21,14 @@ const Detail = ({ setActive }) => {
   };
   return (
     <div className='single relative h-full w-[90%] items-center text-base bg-orange-200 m-10'>
-      <div className='blog-title-box   bg-cover bg-no-repeat bg-center'>
+      <div className='blog-title-box   bg-cover bg-no-repeat bg-center items-center justify-center flex'>
         <img
-          className='w-[80%] ml-20 mt-5 items-center'
+          className='w-2/4 ml-20 mt-5 justify-center items-center'
           src={blog?.imgUrl}
           alt={blog?.title}
         />
 
-        <div className='blog-title z-6 absolute  w-full pl-20 pb-4 ml-18 mt-2'>
+        <div className='blog-title w-full pl-20 pb-4 mt-2 mr-10 md:mr-1'>
           <span>{blog?.timestamp.toDate().toDateString()} </span>
           <h2 className='text-black font-bold text-4xl pb-0 mt-2'>
             {blog?.title}
