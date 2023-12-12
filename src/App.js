@@ -5,13 +5,17 @@ import AddEditBlog from './pages/AddEditBlog';
 import NotFound from './pages/NotFound';
 import About from './pages/About';
 import { ToastContainer, toast } from 'react-toastify';
-import Auth from './pages/Auth';
+
 import Detail from './pages/Detail';
 
 import 'react-toastify/dist/ReactToastify.css';
 import Header from './components/Header';
 import { auth } from './firebase';
 import { signOut } from 'firebase/auth';
+
+import Registration from './pages/Registration';
+import Profile from './pages/Profile';
+import Login from './pages/Login';
 
 const App = () => {
   const [active, setActive] = useState('home');
@@ -59,7 +63,7 @@ const App = () => {
         pauseOnHovertheme='dark'
       />
       <Routes>
-        <Route path='/' element={<Auth setActive={setActive} />} />
+        <Route path='/' element={<Login setActive={setActive} />} />
         <Route
           path='/home'
           element={
@@ -102,6 +106,14 @@ const App = () => {
         <Route
           path='/about'
           element={user && user.uid ? <About /> : <Navigate to='/' />}
+        />
+        <Route
+          path='/registration'
+          element={<Registration setActive={setActive} user={user} />}
+        />
+        <Route
+          path='/profile'
+          element={<Profile setActive={setActive} user={user} />}
         />
 
         <Route path='*' element={<NotFound />} />

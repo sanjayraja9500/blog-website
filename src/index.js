@@ -4,13 +4,15 @@ import './index.css';
 import App from './App';
 import 'mdb-react-ui-kit/dist/css/mdb.min.css';
 import { BrowserRouter } from 'react-router-dom';
+import { UserProvider } from './context/userContext';
 // import '@fortawesome/fontawesome-free/css/all.min.css';
 
-const root = ReactDOM.createRoot(document.getElementById('root'));
-root.render(
+ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <BrowserRouter>
-      <App />
-    </BrowserRouter>
+    <UserProvider>
+      <BrowserRouter>
+        <App />
+      </BrowserRouter>
+    </UserProvider>
   </React.StrictMode>
 );
