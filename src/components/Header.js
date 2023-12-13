@@ -47,6 +47,7 @@ const Header = ({ active, setActive, user, handleLogout }) => {
               <Link to='/profile'>
                 <div className='flex gap-2 justify-center items-center'>
                   <RiAccountPinCircleLine className='text-white text-3xl ' />
+
                   <p className='text-center mt-3 tracking-wide text-white'>
                     Profile
                   </p>

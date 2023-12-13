@@ -125,7 +125,7 @@ const Registration = () => {
                   type='text'
                   name='name'
                   placeholder='User Name'
-                  className='contact-form-name input-text-box text-[15px]h-[45px] tracking-normal w-[50%] h-[2rem]'
+                  className='contact-form-name input-text-box text-[15px]h-[45px] tracking-normal w-[50%] md:h-[2rem] md:w-[70%]'
                   value={userName}
                   onChange={(event) => setUserName(event.target.value)}
                 />
@@ -136,7 +136,7 @@ const Registration = () => {
                   type='email'
                   name='email'
                   placeholder='Email address'
-                  className='contact-form-email input-text-box text-[15px]h-[45px] tracking-normal w-[50%] h-[2rem]'
+                  className='contact-form-email input-text-box text-[15px]h-[45px] tracking-normal w-[50%] md:h-[2rem] md:w-[70%]'
                   value={email}
                   onChange={(event) => setEmail(event.target.value)}
                 />
@@ -146,7 +146,7 @@ const Registration = () => {
                 <input
                   type='password'
                   name='password'
-                  className='contact-form-message input-text-box text-[15px]h-[45px] tracking-normal w-[50%] h-[2rem]'
+                  className='contact-form-message input-text-box text-[15px]h-[45px] tracking-normal w-[50%] md:h-[2rem] md:w-[70%] '
                   placeholder='Password'
                   value={password}
                   onChange={(event) => setPassword(event.target.value)}
@@ -157,7 +157,7 @@ const Registration = () => {
                 <input
                   type='number'
                   name='mobile number'
-                  className='contact-form-message input-text-box text-[15px]h-[45px] tracking-normal w-[50%] h-[2rem]'
+                  className='contact-form-message input-text-box text-[15px]h-[45px] tracking-normal w-[50%] md:h-[2rem] md:w-[70%]'
                   placeholder='Mobile Number'
                   value={number}
                   onChange={(event) => setNumber(event.target.value)}
@@ -170,7 +170,7 @@ const Registration = () => {
                   onChange={(e) => setCity(e.target.value)}
                   id='city'
                   placeholder='City'
-                  className='w-[50%] h-[2rem]'
+                  className='w-[50%] h-[2rem] md:h-[2rem] md:w-[70%]'
                 >
                   <option defaultChecked>City</option>
                   <option value='Chennai'>Chennai</option>
@@ -195,15 +195,9 @@ const Registration = () => {
                   accept='image/*'
                   id='image'
                   onChange={(event) => getImageUrl(event)}
-                  className=' input-text-box text-[15px]h-[45px] tracking-normal w-[50%] h-[2rem]'
+                  className=' input-text-box text-[15px]h-[45px] tracking-normal w-[50%] h-[2rem] md:h-[2rem] md:w-[70%]'
                 />
               </div>
-
-              {imageURL && (
-                <div className='image-url'>
-                  <img src={imageURL} alt='imgUrl' />
-                </div>
-              )}
 
               <div className='btn-container col-12 py-3 text-center'>
                 <button

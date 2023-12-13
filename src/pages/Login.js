@@ -40,6 +40,7 @@ const Login = () => {
       })
       .catch((err) => {
         console.log('Err', err.message);
+        toast.error('Invalid account ');
       });
   };
 
@@ -131,10 +132,10 @@ const Login = () => {
           <div className=' p-1 ml-4 mt-3 bg-orange-100 border b-2 rounded'>
             <h6 className='text-center font-bold'>User Credential</h6>
             <p>
-              <span className='font-semibold'>Email:</span> john01@gmail.com
+              <span className='font-semibold'>Email:</span> jack01@gmail.com
             </p>
             <p className='-mt-4'>
-              <span className='font-semibold'>Password:</span>123456
+              <span className='font-semibold'>Password:</span>jack123
             </p>
           </div>
         ) : null}

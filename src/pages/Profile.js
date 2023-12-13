@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 import { doc, updateDoc } from 'firebase/firestore';
 import { db, auth } from '../firebase';
 import { toast } from 'react-toastify';
-import { signOut } from 'firebase/auth';
+
 import { IoHome } from 'react-icons/io5';
 import { FaCircleArrowLeft } from 'react-icons/fa6';
 
@@ -52,12 +52,16 @@ const Profile = () => {
             image: imageURL,
           });
           fetchProfileData();
+
           toast.success('Profile Update Successfully !');
         } catch (error) {
           console.log(error);
         }
       } else toast.warning('Enter valid phone number !');
     } else toast.warning('Input Field Is Mandatory !');
+    setTimeout(() => {
+      navigate('/home');
+    }, 2000);
   };
 
   // const clearFormInput = () => {
@@ -88,7 +92,7 @@ const Profile = () => {
         <div className='profile-data flex flex-col justify-center items-center  '>
           <h1 className='text-center text-white tracking-wide mt-2'>PROFILE</h1>
 
-          <div className='border-2 border-gray-600 bg-slate-600 text-white p-2'>
+          <div className='border-4 border-zinc-200 bg-slate-600 text-white p-2 backdrop-opacity-10 '>
             <div className='profile-name flex flex-row gap-2 '>
               <label className='text-start text-xl flex justify-center items-center'>
                 UserName <span className='p-1'>:</span>
