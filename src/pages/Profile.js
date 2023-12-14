@@ -74,7 +74,7 @@ const Profile = () => {
   // };
 
   return (
-    <section className=' h-screen w-full flex flex-col justify-center items-center  p-8'>
+    <section className=' h-max w-full flex flex-col justify-center items-center  p-8'>
       <div className=' bg-slate-800 border-2 p-8'>
         <Link to='/home'>
           <FaCircleArrowLeft className='text-2xl font-extrabold text-white' />
