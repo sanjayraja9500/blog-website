@@ -100,7 +100,7 @@ const Registration = () => {
   };
 
   return (
-    <div className='contact  mb-4 mt-24' id='contact'>
+    <div className='contact' id='contact'>
       <div className='title-container bg-gradient-to-r from-blue-400 to-transparent items-center justify-center'>
         <div className='flex  justify-center items-center '>
           <h3
