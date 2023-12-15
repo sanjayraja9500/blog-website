@@ -23,17 +23,17 @@ const Header = ({ active, setActive, user, handleLogout }) => {
 
       <div className='flex justify-around items-center gap-6 font-semibold text-xl  '>
         <div className='flex flex-row  justify-around gap-10 max-sml:font-thin max-sml:flex max-sml:gap-2 '>
-          <div>
+          <div className='mt-0 md:mt-5 '>
             <Link to='/home' className='text-white '>
               Home
             </Link>
           </div>
           <div onClick={() => setActive('addBlog')}>
-            <Link className='text-white' to='/addBlog'>
+            <Link className='text-white  ' to='/addBlog'>
               Add Blog
             </Link>
           </div>
-          <div className='' onClick={() => setActive('about')}>
+          <div className='mt-0 md:mt-10' onClick={() => setActive('about')}>
             <Link to='/about' className='text-white'>
               About
             </Link>
@@ -45,7 +45,7 @@ const Header = ({ active, setActive, user, handleLogout }) => {
           {userId ? (
             <>
               <Link to='/profile'>
-                <div className='flex gap-2 justify-center items-center'>
+                <div className='flex gap-2 justify-center items-center ml-10'>
                   <RiAccountPinCircleLine className='text-white text-3xl ' />
 
                   <p className='text-center mt-3 tracking-wide text-white'>
