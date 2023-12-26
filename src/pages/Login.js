@@ -10,14 +10,12 @@ const Login = () => {
   const navigate = useNavigate();
   const [email, setEmail] = useState();
   const [password, setPassword] = useState();
-  const [isTestBtn, setIsTestBtn] = useState(false);
   const [value, setValue] = useState('');
   const [show, setShow] = useState(false);
 
   const handleLogin = (user) => {
-    signInWithPopup(auth, provider).then((data) => {
-      setValue(data.user.email);
-      localStorage.setItem('email', data.user.email);
+    signInWithPopup(auth, provider).then((userCredential) => {
+      const user = userCredential.user;
       setTimeout(() => {
         navigate('/home');
       }, 1500);

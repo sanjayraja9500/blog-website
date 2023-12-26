@@ -3,7 +3,7 @@ import { createContext, useContext, useState, useEffect } from 'react';
 import { storage, auth } from '../firebase';
 import { onAuthStateChanged } from 'firebase/auth';
 import { ref, uploadBytesResumable, getDownloadURL } from 'firebase/storage';
-
+import { setProfileData } from '../utilis/firebaseFunction';
 import { getProfileData } from '../utilis/firebaseFunction';
 import { toast } from 'react-toastify';
 
@@ -19,6 +19,8 @@ const UserProvider = ({ children }) => {
   const [number, setNumber] = useState();
   const [city, setCity] = useState();
   const [imageURL, setImageURL] = useState();
+  const [isEditing, setIsEditing] = useState(false);
+  const [profile, setProfile] = useState(null);
 
   const getImageUrl = (event) => {
     const imageFile = event.target.files[0];
@@ -62,15 +64,41 @@ const UserProvider = ({ children }) => {
     });
   };
 
+  // const userProfile = () => {
+  //   const filterUser = profileData.find((item) => item.email === email);
+  //   if (filterUser) {
+  //     setId(filterUser.id);
+  //     setEmail(filterUser.email);
+  //     setUserName(filterUser.userName);
+  //     setCity(filterUser.city);
+  //     setImageURL(filterUser.image);
+  //     setNumber(filterUser.number);
+  //   }
+  // };
+
   const userProfile = () => {
     const filterUser = profileData.find((item) => item.email === email);
     if (filterUser) {
-      setId(filterUser.id);
-      setEmail(filterUser.email);
-      setUserName(filterUser.userName);
-      setCity(filterUser.city);
-      setImageURL(filterUser.image);
-      setNumber(filterUser.number);
+      if (filterUser === 'undefined') {
+        setIsEditing(false);
+        setId('nill');
+        setEmail('nill');
+        setUserName('nill');
+
+        setCity('nill');
+        setImageURL('nill');
+        setNumber('nill');
+      } else {
+        setIsEditing(true);
+        setProfile(filterUser.id);
+        setId(filterUser.id);
+        setEmail(filterUser.email);
+        setUserName(filterUser.userName);
+
+        setCity(filterUser.city);
+        setImageURL(filterUser.image);
+        setNumber(filterUser.number);
+      }
     }
   };
 
@@ -110,6 +138,8 @@ const UserProvider = ({ children }) => {
         setId,
         userProfile,
         profileData,
+        isEditing,
+        profile,
         fetchProfileData,
         accessToken,
         setAccessToken,

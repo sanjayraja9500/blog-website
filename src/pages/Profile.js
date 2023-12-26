@@ -4,6 +4,7 @@ import { useEffect } from 'react';
 import { doc, updateDoc } from 'firebase/firestore';
 import { db, auth } from '../firebase';
 import { toast } from 'react-toastify';
+import { setProfileData } from '../utilis/firebaseFunction';
 
 import { IoHome } from 'react-icons/io5';
 import { FaCircleArrowLeft } from 'react-icons/fa6';
@@ -25,7 +26,7 @@ const Profile = () => {
     setId,
     userProfile,
     profileData,
-    setProfileData,
+    isEditing,
     fetchProfileData,
     setAccessToken,
   } = UserConsumer();
@@ -37,41 +38,45 @@ const Profile = () => {
 
   const navigate = useNavigate();
 
-  const updateFunc = async (e) => {
-    e.preventDefault();
+  const addProfileData = async () => {
     if (userName && email && number && city && imageURL) {
       if (number.length === 10) {
-        try {
-          const itemToEditRef = doc(db, 'usersProfileData', id);
-          await updateDoc(itemToEditRef, {
-            id,
+        if (!isEditing) {
+          const data = {
             userName,
             email,
             number,
-            city,
             image: imageURL,
-          });
+            city,
+          };
+          setProfileData(data);
+          navigate('/home');
           fetchProfileData();
-
-          toast.success('Profile Update Successfully !');
-        } catch (error) {
-          console.log(error);
+          toast.success('Successfully Add New Profile');
+        } else {
+          try {
+            const itemToEditRef = doc(db, 'usersProfileData', id);
+            await updateDoc(itemToEditRef, {
+              userName,
+              email,
+              number,
+              image: imageURL,
+              city,
+            });
+          } catch (error) {
+            console.log(error);
+          }
+          navigate('/home');
+          fetchProfileData();
+          toast.success('Profile Update Successfully');
         }
-      } else toast.warning('Enter valid phone number !');
-    } else toast.warning('Input Field Is Mandatory !');
-    setTimeout(() => {
-      navigate('/home');
-    }, 2000);
+      } else {
+        toast.warning('Enter a valid number!');
+      }
+    } else {
+      toast.error('Input Field Is Mandatory!');
+    }
   };
-
-  // const clearFormInput = () => {
-  //   setId('');
-  //   setUserName('');
-  //   setEmail('');
-  //   setCity('');
-  //   setNumber('');
-  //   setImageURL('');
-  // };
 
   return (
     <section className=' h-max w-full flex flex-col justify-center items-center  p-8'>
@@ -183,7 +188,7 @@ const Profile = () => {
                 padding: '10px 50px',
               }}
               className='rounded-md text-xl'
-              onClick={updateFunc}
+              onClick={addProfileData}
             >
               Update Profile
             </button>
